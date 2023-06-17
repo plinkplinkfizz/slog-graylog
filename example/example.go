@@ -14,7 +14,7 @@ func main() {
 	// docker-compose up -d
 	// or
 	// ncat -l 12201 -u
-	gelfWriter, err := gelf.New("localhost:12201")
+	gelfWriter, err := gelf.NewTCPWriter("localhost:12201")
 	if err != nil {
 		log.Fatalf("gelf.NewWriter: %s", err)
 	}
