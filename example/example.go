@@ -5,21 +5,21 @@ import (
 	"log"
 	"time"
 
-	"github.com/Graylog2/go-gelf/gelf"
-	sloggraylog "github.com/samber/slog-graylog"
+	sloggraylog "github.com/plinkplinkfizz/slog-graylog"
 	"golang.org/x/exp/slog"
+	"gopkg.in/Graylog2/go-gelf.v2/gelf"
 )
 
 func main() {
 	// docker-compose up -d
 	// or
 	// ncat -l 12201 -u
-	gelfWriter, err := gelf.NewWriter("localhost:12201")
+	gelfWriter, err := gelf.New("localhost:12201")
 	if err != nil {
 		log.Fatalf("gelf.NewWriter: %s", err)
 	}
 
-	logger := slog.New(sloggraylog.Option{Level: slog.LevelDebug, Writer: gelfWriter}.NewGraylogHandler())
+	logger := slog.New(sloggraylog.Option{Level: slog.LevelDebug, TCPWriter: gelfWriter}.NewGraylogHandler())
 	logger = logger.With("release", "v1.0.0")
 
 	logger.
