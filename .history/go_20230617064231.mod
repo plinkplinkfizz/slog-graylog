@@ -1,4 +1,4 @@
-module github.com/plinkplinkfizz/slog-graylog
+module github.com/samber/slog-graylog
 
 go 1.20
 
