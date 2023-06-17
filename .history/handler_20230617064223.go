@@ -13,7 +13,7 @@ type Option struct {
 	Level slog.Leveler
 
 	// connection to graylog
-	Writer *gelf.TCPWriter
+	Writer *gelf.Writer
 
 	// optional: customize json payload builder
 	Converter Converter

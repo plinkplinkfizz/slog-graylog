@@ -4,8 +4,8 @@ import (
 	"context"
 	"encoding/json"
 
+	"github.com/Graylog2/go-gelf.v2/gelf"
 	"golang.org/x/exp/slog"
-	"gopkg.in/Graylog2/go-gelf.v2/gelf"
 )
 
 type Option struct {
@@ -13,7 +13,7 @@ type Option struct {
 	Level slog.Leveler
 
 	// connection to graylog
-	Writer *gelf.TCPWriter
+	Writer *gelf.Writer
 
 	// optional: customize json payload builder
 	Converter Converter
