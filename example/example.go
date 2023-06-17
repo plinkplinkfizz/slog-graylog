@@ -19,7 +19,7 @@ func main() {
 		log.Fatalf("gelf.NewWriter: %s", err)
 	}
 
-	logger := slog.New(sloggraylog.Option{Level: slog.LevelDebug, TCPWriter: gelfWriter}.NewGraylogHandler())
+	logger := slog.New(sloggraylog.Option{Level: slog.LevelDebug, Writer: gelfWriter}.NewGraylogHandler())
 	logger = logger.With("release", "v1.0.0")
 
 	logger.

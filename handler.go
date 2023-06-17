@@ -13,7 +13,7 @@ type Option struct {
 	Level slog.Leveler
 
 	// connection to graylog
-	TCPWriter *gelf.TCPWriter
+	Writer *gelf.TCPWriter
 
 	// optional: customize json payload builder
 	Converter Converter
@@ -24,7 +24,7 @@ func (o Option) NewGraylogHandler() slog.Handler {
 		o.Level = slog.LevelDebug
 	}
 
-	if o.TCPWriter == nil {
+	if o.Writer == nil {
 		panic("missing graylog connections")
 	}
 
@@ -58,7 +58,7 @@ func (h *GraylogHandler) Handle(ctx context.Context, record slog.Record) error {
 		return err
 	}
 
-	_, err = h.option.TCPWriter.Write(append(bytes, byte('\n')))
+	_, err = h.option.Writer.Write(append(bytes, byte('\n')))
 
 	return err
 }
